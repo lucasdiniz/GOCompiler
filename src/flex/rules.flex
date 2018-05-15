@@ -13,6 +13,8 @@ package flex;
     Caracter "_" é considerado uma letra em GO.
     a-f dá matche em todos os caracteres de a até f
     [xX] dá matche em x ou X
+    [^] dá matche em TODOS os caracteres
+    [.] dá matche em todos os caracteres menos fim de linhas UNICODE
 
     Unicode letters = [:letter:]
     Unidode digits = [:digit:]
@@ -29,7 +31,8 @@ package flex;
 %line
 %column
 
-new_line = \u000A | \n
+line_terminator = \r|\n|\r\n|\u000A
+white_space = {line_terminator} | [ \t\f]
 comment = ("/*"[^*]"*/") | ("//"[^*]new_line)
 letter = [:letter:] | _
 identifier = letter([:digit:] | letter)*
@@ -43,21 +46,14 @@ decimals = {decimal_digit}{decimal_digit}*
 exponent = [eE][+-]?{decimals}
 float_literal = ({decimals}"."{decimals}?{exponent}?) | ({decimals}{exponent}) | ("."{decimals}{exponent}?)
 
-%x COMMENTS
-
 %%
 
 <YYINITIAL> {
-    "/*"                                                        { yybegin(COMMENTS); }
-    "//".*                                                      { /* consume //-comment */ }
-    {decimal_literal} | {hex_literal} | {float_literal}         {System.out.println("Found literal:" + yytext());}
+    "/*"[^*/]*"*/"                                              { System.out.println("Found traditional comment: " + yytext()); }
+    "//"[^]*{line_terminator}                                   { System.out.println("Found inline comment:" + yytext().substring(2));}
+    {decimal_literal}                                           { System.out.println("Found decimal literal:" + yytext());}
+    {float_literal}                                             { System.out.println("Found float literal:" + yytext());}
+    {hex_literal}                                               { System.out.println("Found hex literal:" + yytext());}
+    {white_space}                                               { /* Ignore */}
+    .*|{line_terminator}                                        { /* process default here */ System.out.println("Found unmatched lexxema:" + yytext());}
 }
-
-<COMMENTS> {
-    [^*\n]+                                                     { }
-    "*"+[^*/\n]*                                                { }
-    \n                                                          {yyline++;}
-    "*"+"/"                                                     {yybegin(0);}
-}
-
-<<EOF>>                                                         {}

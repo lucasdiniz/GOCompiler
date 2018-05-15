@@ -1,0 +1,18 @@
+/*cometario tradicional*/
+/*cometario tradicional*/430209
+/*cometario
+tradicional
+em varias linhas*/
+texto
+teste
+string
+32
+4324
+1.
+1.e3
+1E3
+1E3letras
+hahaha
+//comentario inline
+depoisDoInline
+//comentario inline sem quebra de linha
