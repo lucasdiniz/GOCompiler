@@ -142,4 +142,5 @@ imaginary_literal = ({float_literal}|{decimal_literal})i
     {identifier}                                                { System.out.println("Found identifier: " + yytext()); }
     {string_literal}                                            { System.out.println("Found string literal: " + yytext()); }
     {imaginary_literal}                                         { System.out.println("Found imaginary literal: " + yytext()); }
+    {octal_literal}                                             { System.out.println("Found octal literal: " + yytext()); }
 }

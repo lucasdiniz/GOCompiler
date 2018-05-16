@@ -23,5 +23,5 @@ func main() {
         fmt.Println(elem)
     }
     450i
-    3f3k
+    0400
 }
