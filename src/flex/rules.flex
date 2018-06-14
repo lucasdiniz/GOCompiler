@@ -1,6 +1,6 @@
 package flex;
 import java_cup.runtime.*;
-
+import cup.sym;
 /*
 
     OBSERVAÇÕES:
@@ -27,6 +27,8 @@ import java_cup.runtime.*;
 %class Lexer
 %standalone
 %cup
+%cupdebug
+%debug
 
 %unicode
 
