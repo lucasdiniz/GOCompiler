@@ -1,4 +1,5 @@
 package flex;
+import java_cup.runtime.*;
 
 /*
 
@@ -25,17 +26,18 @@ package flex;
 
 %class Lexer
 %standalone
+%cup
 
 %unicode
 
 %line
 %column
 
+identifier =  [:jletter:] [:jletterdigit:]*
 line_terminator = \r|\n|\r\n|\u000A
 white_space = {line_terminator} | [ \t\f]
 comment = ("/*"[^*]"*/") | ("//"[^*]new_line)
 letter = [:letter:] | _
-identifier = {letter}([:digit:] | {letter})*
 decimal_digit = [0-9]
 octal_digit   = [0-7]
 hex_digit     = [0-9a-fA-F]
@@ -79,7 +81,7 @@ imaginary_literal = ({float_literal}|{decimal_literal})i
     "import"                                                    { System.out.println("Found keyword: " + yytext()); }
     "return"                                                    { System.out.println("Found keyword: " + yytext()); }
     "var"                                                       { System.out.println("Found keyword: " + yytext()); }
-
+    
     /*OPERATORS AND PUNCTUATION*/
 
 
