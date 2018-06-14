@@ -2,3 +2,4 @@
 .DS_Store
 .idea/
 src/flex/Lexer.java~
+.ipynb_checkpoints
