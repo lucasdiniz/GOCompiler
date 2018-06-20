@@ -1,0 +1,119 @@
+import java_cup.runtime.*;
+
+/* Este codigo foi reusado do exemplo de Daniel. Ele serve para nos mostrar aonde ocorreu um erro, ao ler um arquivo de entrada. */
+
+parser code {:
+
+    public void report_error(String message, Object info) {
+
+        StringBuffer m = new StringBuffer("Error");
+
+        if (info instanceof java_cup.runtime.Symbol) {
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+            if (s.left >= 0) {
+                /* Add to the end of the StringBuffer error message
+                   the line number of the error in the input. */
+                m.append(" in line "+(s.left+1));
+                /* Check if the column number in the input is greater
+                   or equal to zero. */
+                if (s.right >= 0)
+                    /* Add to the end of the StringBuffer error message
+                       the column number of the error in the input. */
+                    m.append(", column "+(s.right+1));
+            }
+        }
+
+
+        m.append(" : "+message);
+        System.err.println(m);
+    }
+
+    public void report_fatal_error(String message, Object info) {
+        report_error(message, info);
+        System.exit(1);
+    }
+:};
+
+/* Aqui estao listados todos os simbolos terminais da gramatica */
+
+terminal BREAK,
+         DEFAULT,
+         FUNC,
+         INTERFACE,
+         SELECT,
+         CASE,
+         DEFER,
+         GO,
+         MAP,
+         CHAN,
+         ELSE,
+         PACKAGE,
+         SWITCH,
+         CONST,
+         FALLTHROUGH,
+         IF,
+         RANGE,
+         TYPE,
+         CONTINUE,
+         FOR,
+         IMPORT,
+         RETURN,
+         VAR,
+         PLUS,
+         BIT_AND,
+         PLUS_ASSINGMENT,
+         BIT_AND_ASSINGMENT,
+         LOGICAL_AND,
+         EQUALS,
+         NOT_EQUALS,
+         OPEN_PARENTHESES,
+         CLOSE_PARENTHESES,
+         MINUS,
+         BIT_OR,
+         MINUS_ASSINGMENT,
+         BIT_OR_ASSINGMENT,
+         LOGICAL_OR,
+         LESS_THAN,
+         LESS_THAN_EQUALS,
+         OPEN_SQUARE_BRACKET,
+         CLOSE_SQUARE_BRACKET,
+         MULTIPLICATION,
+         BIT_XOR,
+         MULTIPLICATION_ASSINGMENT,
+         BIT_XOR_ASSINGMENT,
+         LEFT_ARROW,
+         GREATER_THAN,
+         GREATER_THAN_EQUALS,
+         OPEN_CURLY_BRACKETS,
+         CLOSE_CURLY_BRACKETS,
+         DIVISION,
+         BIN_SHIFT_LEFT,
+         DIVISION_ASSINGMENT,
+         BIN_SHIFT_LEFT_ASSINGMENT,
+         PLUS_PLUS,
+         ASSINGMENT,
+         COLON_EQUALS,
+         COMMA,
+         SEMICOLON,
+         PERCENT,
+         BIN_SHIFT_RIGHT,
+         PERCENT_EQUALS,
+         BIN_SHIFT_RIGHT_ASSIGNMENT,
+         MINUS_MINUS,
+         EXCLAMATION_POINT,
+         RETICENCE,
+         DOT,
+         COLON,
+         BIT_AND_NOT,
+         BIT_AND_NOT_ASSIGNMENT,
+         DECIMAL_LITERAL,
+         FLOAT_LITERAL,
+         HEX_LITERAL,
+         IDENTIFIER,
+         STRING_LITERAL,
+         IMAGINARY_LITERAL,
+         OCTAL_LITERAL;
+
+non terminal expr;
+
+expr ::= DOT;
