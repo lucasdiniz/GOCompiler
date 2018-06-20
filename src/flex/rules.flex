@@ -80,64 +80,64 @@ imaginary_literal = ({float_literal}|{decimal_literal})i
     "go"                                                        { return symbol(sym.GO, new String(yytext())); }
     "map"                                                       { return symbol(sym.MAP, new String(yytext())); }
     "struct"                                                    { return symbol(sym.INTERFACE, new String(yytext())); }
-    "chan"                                                      { System.out.println("Found keyword: " + yytext()); }
-    "else"                                                      { System.out.println("Found keyword: " + yytext()); }
-    "goto"                                                      { System.out.println("Found keyword: " + yytext()); }
-    "package"                                                   { System.out.println("Found keyword: " + yytext()); }
-    "switch"                                                    { System.out.println("Found keyword: " + yytext()); }
-    "const"                                                     { System.out.println("Found keyword: " + yytext()); }
-    "fallthrough"                                               { System.out.println("Found keyword: " + yytext()); }
-    "if"                                                        { System.out.println("Found keyword: " + yytext()); }
-    "range"                                                     { System.out.println("Found keyword: " + yytext()); }
-    "type"                                                      { System.out.println("Found keyword: " + yytext()); }
-    "continue"                                                  { System.out.println("Found keyword: " + yytext()); }
-    "for"                                                       { System.out.println("Found keyword: " + yytext()); }
-    "import"                                                    { System.out.println("Found keyword: " + yytext()); }
-    "return"                                                    { System.out.println("Found keyword: " + yytext()); }
-    "var"                                                       { System.out.println("Found keyword: " + yytext()); }
+    "chan"                                                      { return symbol(sym.CHAN, new String(yytext())); }
+    "else"                                                      { return symbol(sym.ELSE, new String(yytext())); }
+    "goto"                                                      { return symbol(sym.INTERFACE, new String(yytext())); }
+    "package"                                                   { return symbol(sym.PACKAGE, new String(yytext())); }
+    "switch"                                                    { return symbol(sym.SWITCH, new String(yytext())); }
+    "const"                                                     { return symbol(sym.CONST, new String(yytext())); }
+    "fallthrough"                                               { return symbol(sym.FALLTHROUGH, new String(yytext())); }
+    "if"                                                        { return symbol(sym.IF, new String(yytext())); }
+    "range"                                                     { return symbol(sym.RANGE, new String(yytext())); }
+    "type"                                                      { return symbol(sym.TYPE, new String(yytext())); }
+    "continue"                                                  { return symbol(sym.CONTINUE, new String(yytext())); }
+    "for"                                                       { return symbol(sym.FOR, new String(yytext())); }
+    "import"                                                    { return symbol(sym.IMPORT, new String(yytext()));}
+    "return"                                                    { return symbol(sym.RETURN, new String(yytext())); }
+    "var"                                                       { return symbol(sym.VAR, new String(yytext()));  }
     
     /*OPERATORS AND PUNCTUATION*/
 
 
-    "+"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "&"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "+= "                                                       { System.out.println("Found operator/punctuation: " + yytext()); }
-    "&="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "&&"                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "=="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "!="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "("                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    ")"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "-"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "|"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "-="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "|="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "||"                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "<"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "<="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "["                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "]"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "*"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "^"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "*="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "^="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "<-"                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    ">"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    ">="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "{"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "}"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "/"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "<<"                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "/="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "<<="                                                       { System.out.println("Found operator/punctuation: " + yytext()); }
-    "++"                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "="                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    ":="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    ","                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    ";"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "%"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    ">>"                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "%="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
+    "+"                                                         { return symbol(sym.PLUS, new String(yytext()));  }
+    "&"                                                         { return symbol(sym.BIT_AND, new String(yytext())); }
+    "+= "                                                       { return symbol(sym.PLUS_ASSINGMENT, new String(yytext())); }
+    "&="                                                        { return symbol(sym.BIT_AND_ASSINGMENT, new String(yytext())); }
+    "&&"                                                        { return symbol(sym.LOGICAL_AND, new String(yytext())); }
+    "=="                                                        { return symbol(sym.EQUALS, new String(yytext())); }
+    "!="                                                        { return symbol(sym.NOT_EQUALS, new String(yytext())); }
+    "("                                                         { return symbol(sym.OPEN_PARENTHESES, new String(yytext())); }
+    ")"                                                         { return symbol(sym.CLOSE_PARENTHESES, new String(yytext())); }
+    "-"                                                         { return symbol(sym.MINUS, new String(yytext())); }
+    "|"                                                         { return symbol(sym.BIT_OR, new String(yytext())); }
+    "-="                                                        { return symbol(sym.MINUS_ASSINGMENT, new String(yytext())); }
+    "|="                                                        { return symbol(sym.BIT_OR_ASSINGMENT, new String(yytext())); }
+    "||"                                                        { return symbol(sym.LOGICAL_OR, new String(yytext())); }
+    "<"                                                         { return symbol(sym.LESS_THAN, new String(yytext())); }
+    "<="                                                        { return symbol(sym.LESS_THAN_EQUALS, new String(yytext())); }
+    "["                                                         { return symbol(sym.OPEN_SQUARE_BRACKET, new String(yytext())); }
+    "]"                                                         { return symbol(sym.CLOSE_SQUARE_BRACKET, new String(yytext())); }
+    "*"                                                         { return symbol(sym.MULTIPLICATION, new String(yytext())); }
+    "^"                                                         { return symbol(sym.BIT_XOR, new String(yytext())); }
+    "*="                                                        { return symbol(sym.MULTIPLICATION_ASSINGMENT, new String(yytext())); }
+    "^="                                                        { return symbol(sym.BIT_XOR_ASSINGMENT, new String(yytext())); }
+    "<-"                                                        { return symbol(sym.LEFT_ARROW, new String(yytext())); }
+    ">"                                                         { return symbol(sym.GREATER_THAN, new String(yytext())); }
+    ">="                                                        { return symbol(sym.GREATER_THAN_EQUALS, new String(yytext())); }
+    "{"                                                         { return symbol(sym.OPEN_CURLY_BRACKETS, new String(yytext())); }
+    "}"                                                         { return symbol(sym.CLOSE_CURLY_BRACKETS, new String(yytext())); }
+    "/"                                                         { return symbol(sym.DIVISION, new String(yytext())); }
+    "<<"                                                        { return symbol(sym.BIN_SHIFT_LEFT, new String(yytext())); }
+    "/="                                                        { return symbol(sym.DIVISION_ASSINGMENT, new String(yytext())); }
+    "<<="                                                       { return symbol(sym.BIN_SHIFT_LEFT_ASSINGMENT, new String(yytext())); }
+    "++"                                                        { return symbol(sym.PLUS_PLUS, new String(yytext())); }
+    "="                                                         { return symbol(sym.ASSINGMENT, new String(yytext())); }
+    ":="                                                        { return symbol(sym.COLON_EQUALS, new String(yytext())); }
+    ","                                                         { return symbol(sym.COMMA, new String(yytext())); }
+    ";"                                                         { return symbol(sym.SEMICOLON, new String(yytext())); }
+    "%"                                                         { return symbol(sym.PERCENT, new String(yytext())); }
+    ">>"                                                        { return symbol(sym.BIN_SHIFT_RIGHT, new String(yytext())); }
+    "%="                                                        { return symbol(sym.PERCENT_EQUALS, new String(yytext())); }
     ">>="                                                       { System.out.println("Found operator/punctuation: " + yytext()); }
     "--"                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
     "!"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
