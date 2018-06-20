@@ -1,6 +1,6 @@
 package flex;
 import java_cup.runtime.*;
-import java_cup.sym;
+import cup.sym;
 /*
 
     OBSERVAÇÕES:

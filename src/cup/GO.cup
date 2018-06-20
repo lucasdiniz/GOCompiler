@@ -36,113 +36,84 @@ parser code {:
 
 /* Aqui estao listados todos os simbolos terminais da gramatica */
 
-terminal AUTO, BREAK, CASE, CHAR, CONST, CONTINUE, DEFAULT, DO, DOUBLE, ELSE, ENUM, EXTERN, FLOAT, FOR, GOTO, IF, INT,
-LONG, REGISTER, RETURN, SHORT, SIGNED, SIZEOF, STATIC, STRUCT, SWITCH, TYPEDEF, UNION, UNSIGNED, VOID, VOLATILE, WHILE,
-ELLIPSIS, RIGHT_ASSIGN, LEFT_ASSIGN, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, AND_ASSIGN, XOR_ASSIGN,
-OR_ASSIGN, RIGHT_OP, LEFT_OP, INC_OP, DEC_OP, PTR_OP, AND_OP, OR_OP, LE_OP, GE_OP, EQ_OP, NE_OP, PONTOEVIRGULA, ABRECHAVES,
-FECHACHAVES, VIRGULA, DOISPONTOS, IGUAL, ABREPARENTESES, FECHAPARENTESES, ABRECOCHETES, FECHACOCHETES, PONTO, ECOMERCIAL,
-EXCLAMACAO, TIO, MENOS, MAIS, ASTERISCO, BARRA, PORCENTO, MENORQUE, MAIORQUE, CIRCUNFLEXO, PIPELINE, INTERROGACAO, CONSTANT, IDENTIFIER, STRING_LITERAL ; /* CONSTANT, IDENTIFIER, STRING_LITERAL estão errados, falta definir! */
+terminal BREAK,
+         DEFAULT,
+         FUNC,
+         INTERFACE,
+         SELECT,
+         CASE,
+         DEFER,
+         GO,
+         MAP,
+         CHAN,
+         ELSE,
+         PACKAGE,
+         SWITCH,
+         CONST,
+         FALLTHROUGH,
+         IF,
+         RANGE,
+         TYPE,
+         CONTINUE,
+         FOR,
+         IMPORT,
+         RETURN,
+         VAR,
+         PLUS,
+         BIT_AND,
+         PLUS_ASSINGMENT,
+         BIT_AND_ASSINGMENT,
+         LOGICAL_AND,
+         EQUALS,
+         NOT_EQUALS,
+         OPEN_PARENTHESES,
+         CLOSE_PARENTHESES,
+         MINUS,
+         BIT_OR,
+         MINUS_ASSINGMENT,
+         BIT_OR_ASSINGMENT,
+         LOGICAL_OR,
+         LESS_THAN,
+         LESS_THAN_EQUALS,
+         OPEN_SQUARE_BRACKET,
+         CLOSE_SQUARE_BRACKET,
+         MULTIPLICATION,
+         BIT_XOR,
+         MULTIPLICATION_ASSINGMENT,
+         BIT_XOR_ASSINGMENT,
+         LEFT_ARROW,
+         GREATER_THAN,
+         GREATER_THAN_EQUALS,
+         OPEN_CURLY_BRACKETS,
+         CLOSE_CURLY_BRACKETS,
+         DIVISION,
+         BIN_SHIFT_LEFT,
+         DIVISION_ASSINGMENT,
+         BIN_SHIFT_LEFT_ASSINGMENT,
+         PLUS_PLUS,
+         ASSINGMENT,
+         COLON_EQUALS,
+         COMMA,
+         SEMICOLON,
+         PERCENT,
+         BIN_SHIFT_RIGHT,
+         PERCENT_EQUALS,
+         BIN_SHIFT_RIGHT_ASSIGNMENT,
+         MINUS_MINUS,
+         EXCLAMATION_POINT,
+         RETICENCE,
+         DOT,
+         COLON,
+         BIT_AND_NOT,
+         BIT_AND_NOT_ASSIGNMENT,
+         DECIMAL_LITERAL,
+         FLOAT_LITERAL,
+         HEX_LITERAL,
+         IDENTIFIER,
+         STRING_LITERAL,
+         IMAGINARY_LITERAL,
+         OCTAL_LITERAL;
 
-/* Aqui estao listados todos os simbolos nao terminais da gramatica */
+non terminal expr;
 
-non terminal primary_expression,
-		 	 postfix_expression,
-		 	 argument_expression_list,
-		 	 unary_expression,
-		 	 unary_operator,
-		 	 cast_expression,
-		 	 additive_expression,
-		 	 shift_expression,
-		 	 relational_expression,
-		 	 equality_expression,
-		 	 and_expression,
-		 	 inclusive_or_expression,
-		 	 exclusive_or_expression,
-		 	 logical_and_expression,
-			 logical_or_expression,
-			 conditional_expression,
-			 assignment_expression,
-			 assignment_operator,
-			 expression,
-			 constant_expression,
-			 declaration,
-			 declaration_specifiers,
-			 init_declarator_list,
-			 init_declarator,
-			 storage_class_specifier,
-			 type_specifier,
-			 struct_or_union_specifier,
-			 struct_or_union,
-			 struct_declaration_list,
-			 struct_declaration,
-			 specifier_qualifier_list,
-			 struct_declarator_list,
-			 struct_declarator,
-			 enum_specifier,
-			 enumerator_list,
-			 enumerator,
-			 type_qualifier,
-			 declarator,
-			 direct_declarator,
-			 pointer,
-			 type_qualifier_list,
-			 parameter_type_list,
-			 parameter_list,
-			 parameter_declaration,
-			 identifier_list,
-	 		 type_name,
-		 	 abstract_declarator,
-			 direct_abstract_declarator,
-			 initializer,
-			 initializer_list,
-			 statement,
-			 labeled_statement,
-			 compound_statement,
-			 declaration_list,
-			 statement_list,
-			 expression_statement,
-			 selection_statement,
-			 iteration_statement,
-			 jump_statement,
-			 translation_unit,
-			 external_declaration,
-			 function_definition,
-			 multiplicative_expression;
-
-/* Regra inicial */
-
-start with translation_unit;
-
-/* Regras da gramatica */
-
-primary_expression
-	::= IDENTIFIER:id
-	{: Simbolo s = new Simbolo(id.toString(), "IDENTIFIER", null); RESULT = s; :}
-	| CONSTANT:cons
-	{: Simbolo s = new Simbolo(cons.toString(), "CONSTANT", null); RESULT = s; :}
-	| STRING_LITERAL:str
-	{: Simbolo s = new Simbolo(str.toString(), "STRING", null); RESULT = s; :}
-	| ABREPARENTESES expression:exp FECHAPARENTESES
-	{: RESULT = exp; :}
-	;
-
-postfix_expression
-	::= primary_expression:pexp
-	{: RESULT = pexp; :}
-	| postfix_expression ABRECOCHETES expression FECHACOCHETES
-	| postfix_expression:p ABREPARENTESES FECHAPARENTESES
-	{: Object f = CheckTypes.checkIfFuncaoExist(p.toString(), ""); TabelaSimbolos.getInstance().addCallFunction(f); :}
-	| postfix_expression:p ABREPARENTESES argument_expression_list:a FECHAPARENTESES
-	{: Object f = CheckTypes.checkIfFuncaoExist(p.toString(), a.toString()); TabelaSimbolos.getInstance().addCallFunction(f); :}
-	| postfix_expression PONTO IDENTIFIER
-	| postfix_expression PTR_OP IDENTIFIER
-	| postfix_expression INC_OP
-	| postfix_expression DEC_OP
-	;
-
-argument_expression_list
-	::= assignment_expression:ae
-	{: RESULT = ae; :}
-	| argument_expression_list:ael VIRGULA assignment_expression:ae
-	{: RESULT = ael + ", " + ae; :}
-	;
+expr ::= DOT;
