@@ -149,14 +149,14 @@ imaginary_literal = ({float_literal}|{decimal_literal})i
 
     /*TOKENS*/
 
-    "/*"[^*/]*"*/"{line_terminator}?                            { System.out.println("Found traditional comment: " + yytext()); yyline++; yybegin(0);}
-    "//"[^\n]*{line_terminator}?                                { System.out.println("Found inline comment:" + yytext().substring(2));}
-    {decimal_literal}                                           { System.out.println("Found decimal literal:" + yytext());}
-    {float_literal}                                             { System.out.println("Found float literal:" + yytext());}
-    {hex_literal}                                               { System.out.println("Found hex literal:" + yytext());}
+    "/*"[^*/]*"*/"{line_terminator}?                            { /* Ignore */ }
+    "//"[^\n]*{line_terminator}?                                { /* Ignore */ }
+    {decimal_literal}                                           { return symbol(sym.DECIMAL_LITERAL, new String(yytext())); }
+    {float_literal}                                             { return symbol(sym.FLOAT_LITERAL, new String(yytext())); }
+    {hex_literal}                                               { return symbol(sym.HEX_LITERAL, new String(yytext())); }
     {white_space}                                               { /* Ignore */}
-    {identifier}                                                { System.out.println("Found identifier: " + yytext()); }
-    {string_literal}                                            { System.out.println("Found string literal: " + yytext()); }
-    {imaginary_literal}                                         { System.out.println("Found imaginary literal: " + yytext()); }
-    {octal_literal}                                             { System.out.println("Found octal literal: " + yytext()); }
+    {identifier}                                                { return symbol(sym.IDENTIFIER, new String(yytext())); }
+    {string_literal}                                            { return symbol(sym.STRING_LITERAL, new String(yytext())); }
+    {imaginary_literal}                                         { return symbol(sym.IMAGINARY_LITERAL, new String(yytext())); }
+    {octal_literal}                                             { return symbol(sym.OCTAL_LITERAL, new String(yytext())); }
 }
