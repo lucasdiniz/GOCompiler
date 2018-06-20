@@ -1,6 +1,6 @@
 package flex;
 import java_cup.runtime.*;
-import cup.sym;
+import java_cup.sym;
 /*
 
     OBSERVAÇÕES:
@@ -35,6 +35,18 @@ import cup.sym;
 %line
 %column
 
+%{
+
+       private Symbol symbol(int type) {
+           return new Symbol(type, yyline, yycolumn);
+          }
+
+        private Symbol symbol(int type, Object val) {
+           return new Symbol(type, yyline, yycolumn, val);
+          }
+
+%}
+
 identifier =  [:jletter:] [:jletterdigit:]*
 line_terminator = \r|\n|\r\n|\u000A
 white_space = {line_terminator} | [ \t\f]
@@ -58,16 +70,16 @@ imaginary_literal = ({float_literal}|{decimal_literal})i
 
     /*KEYWORDS*/
 
-    "break"                                                     { System.out.println("Found keyword: " + yytext()); }
-    "default"                                                   { System.out.println("Found keyword: " + yytext()); }
-    "func"                                                      { System.out.println("Found keyword: " + yytext()); }
-    "interface"                                                 { System.out.println("Found keyword: " + yytext()); }
-    "select"                                                    { System.out.println("Found keyword: " + yytext()); }
-    "case"                                                      { System.out.println("Found keyword: " + yytext()); }
-    "defer"                                                     { System.out.println("Found keyword: " + yytext()); }
-    "go"                                                        { System.out.println("Found keyword: " + yytext()); }
-    "map"                                                       { System.out.println("Found keyword: " + yytext()); }
-    "struct"                                                    { System.out.println("Found keyword: " + yytext()); }
+    "break"                                                     { return symbol(sym.BREAK, new String(yytext())); }
+    "default"                                                   { return symbol(sym.DEFAULT, new String(yytext())); }
+    "func"                                                      { return symbol(sym.FUNC, new String(yytext())); }
+    "interface"                                                 { return symbol(sym.INTERFACE, new String(yytext())); }
+    "select"                                                    { return symbol(sym.SELECT, new String(yytext())); }
+    "case"                                                      { return symbol(sym.CASE, new String(yytext())); }
+    "defer"                                                     { return symbol(sym.DEFER, new String(yytext())); }
+    "go"                                                        { return symbol(sym.GO, new String(yytext())); }
+    "map"                                                       { return symbol(sym.MAP, new String(yytext())); }
+    "struct"                                                    { return symbol(sym.INTERFACE, new String(yytext())); }
     "chan"                                                      { System.out.println("Found keyword: " + yytext()); }
     "else"                                                      { System.out.println("Found keyword: " + yytext()); }
     "goto"                                                      { System.out.println("Found keyword: " + yytext()); }
