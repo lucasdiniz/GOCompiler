@@ -138,14 +138,14 @@ imaginary_literal = ({float_literal}|{decimal_literal})i
     "%"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
     ">>"                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
     "%="                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    ">>="                                                       { System.out.println("Found operator/punctuation: " + yytext()); }
-    "--"                                                        { System.out.println("Found operator/punctuation: " + yytext()); }
-    "!"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "..."                                                       { System.out.println("Found operator/punctuation: " + yytext()); }
-    "."                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    ":"                                                         { System.out.println("Found operator/punctuation: " + yytext()); }
-    "&^ "                                                       { System.out.println("Found operator/punctuation: " + yytext()); }
-    "&^="                                                       { System.out.println("Found operator/punctuation: " + yytext()); }
+    ">>="                                                       { return symbol(sym.BIN_SHIFT_RIGHT_ASSIGNMENT, new String(yytext())); }
+    "--"                                                        { return symbol(sym.MINUS_MINUS, new String(yytext())); }
+    "!"                                                         { return symbol(sym.EXCLAMATION_POINT, new String(yytext())); }
+    "..."                                                       { return symbol(sym.RETICENCE, new String(yytext())); }
+    "."                                                         { return symbol(sym.DOT, new String(yytext())); }
+    ":"                                                         { return symbol(sym.COLON, new String(yytext())); }
+    "&^"                                                        { return symbol(sym.BIT_AND_NOT, new String(yytext())); }
+    "&^="                                                       { return symbol(sym.BIT_AND_NOT_ASSIGNMENT, new String(yytext())); }
 
     /*TOKENS*/
 
